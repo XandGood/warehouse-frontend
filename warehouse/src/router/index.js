@@ -1,20 +1,28 @@
+
 import { createRouter, createWebHistory } from 'vue-router'
 
+// 路由规则
 const routes = [
-  {
-    path: '/',
-    redirect: '/dashboard'
-  },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/Login.vue')
+    component: () => import('../views/user/Login.vue') // 登录页
   },
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('@/views/Dashboard.vue'),
-    meta: { requiresAuth: true }
+    path: '/',
+    component: () => import('../layout/mainLayout.vue'), // 首页（需登录访问）
+    meta: { requiresAuth: true }, // 标记需要登录
+    children: [
+      {
+        path: '',
+        redirect: '/home'
+      },
+      {
+        path: '/home',
+        name: 'Home',
+        component: () => import('../views/user/Home.vue')
+      }
+    ]
   }
 ]
 
@@ -23,17 +31,14 @@ const router = createRouter({
   routes
 })
 
-// 路由守卫
+// 路由守卫（验证登录状态）
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !isLoggedIn()) {
+  // 如果路由需要登录，且本地无Token，跳转到登录页
+  if (to.meta.requiresAuth && !localStorage.getItem('token')) {
     next('/login')
   } else {
     next()
   }
 })
-
-function isLoggedIn() {
-  return localStorage.getItem('token')
-}
 
 export default router

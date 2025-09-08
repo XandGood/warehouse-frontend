@@ -5,23 +5,24 @@
         :default-active="activeMenu"
         class="el-menu-vertical"
         router
+        background-color="#304156"
+        text-color="white"
+        active-text-color="#eeeeee"
       >
-        <el-menu-item index="/dashboard">
-          <el-icon><Monitor /></el-icon>
-          <span>仪表盘</span>
-        </el-menu-item>
-        <el-menu-item index="/inventory">
-          <el-icon><Box /></el-icon>
-          <span>库存管理</span>
-        </el-menu-item>
+        <el-sub-menu index="1">
+          <template #title>用户管理</template>
+          <el-menu-item index="/home">用户列表</el-menu-item>
+        </el-sub-menu>
+        <!-- 可以继续添加其他菜单项 -->
       </el-menu>
     </el-aside>
     <el-container>
       <el-header>
+        <div>仓库管理系统</div>
         <div class="header-right">
           <el-dropdown>
             <span class="user-info">
-              管理员<el-icon><arrow-down /></el-icon>
+              {{username}}
             </span>
             <template #dropdown>
               <el-dropdown-menu>
@@ -39,11 +40,19 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed, onMounted, ref} from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
+const username = ref('')
+
+onMounted(() => {
+  if (!localStorage.getItem('token')) {
+    router.push('/login')
+  }
+  username.value = localStorage.getItem('username')
+})
 
 const activeMenu = computed(() => route.path)
 
@@ -59,15 +68,18 @@ const handleLogout = () => {
 }
 .el-header {
   background-color: #fff;
+  border-bottom: 1px solid #eee;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-end;
-  border-bottom: 1px solid #e6e6e6;
+  padding: 0 40px;
 }
 .header-right {
-  padding-right: 20px;
+  display: flex;
+  align-items: center;
 }
 .user-info {
   cursor: pointer;
 }
 </style>
+
