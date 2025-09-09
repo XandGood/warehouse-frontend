@@ -6,7 +6,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/user/Login.vue') // 登录页
+    component: () => import('../views/user/UserLogin.vue') // 登录页
   },
   {
     path: '/',
@@ -20,7 +20,7 @@ const routes = [
       {
         path: '/home',
         name: 'Home',
-        component: () => import('../views/user/Home.vue')
+        component: () => import('../views/user/UserList.vue')
       }
     ]
   }

@@ -29,7 +29,8 @@ export const useUserStore = defineStore('user', () => {
     await handleDelete(id)
     await loadUserList()
   }
-  async function cancelUserUpdate() {
+  async function cancelUpdate() {
+    cancelUserUpdate()
     currentUser.value = {}
   }
   
@@ -41,6 +42,6 @@ export const useUserStore = defineStore('user', () => {
     addUser,
     updateUser,
     deleteUser,
-    cancelUserUpdate
+    cancelUpdate
   }
 })
