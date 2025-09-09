@@ -1,0 +1,17 @@
+/* 全局样式，防止不必要滚动条 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#app {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 如果需要在特定区域显示滚动条 */
+.el-main {
+  overflow-y: auto !important;
+}

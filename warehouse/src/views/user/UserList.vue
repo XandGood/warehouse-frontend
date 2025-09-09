@@ -15,7 +15,7 @@
             </el-table-column>
             <el-table-column label="操作">
               <template #default="scope">
-                <el-button type="text" @click="userStore.loadUserById(scope.row.id),showUpdateUserDialog = true">编辑</el-button>
+                <el-button type="text" @click="handleEdit(scope.row.id)">编辑</el-button>
                 <el-button type="text" @click="userStore.deleteUser(scope.row.id)">删除</el-button>
               </template>
             </el-table-column>
@@ -24,29 +24,29 @@
 
         <!-- 新增用户对话框-->
         <el-dialog title="新增用户" v-model="showAddUserDialog" width="30%">
-          <el-form  :model="newUser" label-width="80px">
+          <el-form  :model="userStore.newUser" label-width="80px">
             <el-form-item label="用户名">
-              <el-input v-model="newUser.username"></el-input>
+              <el-input v-model="userStore.newUser.username"></el-input>
             </el-form-item>
             <el-form-item label="姓名">
-              <el-input v-model="newUser.name"></el-input>
+              <el-input v-model="userStore.newUser.name"></el-input>
             </el-form-item>
             <el-form-item label="角色">
-              <el-select v-model="newUser.role" placeholder="请选择角色">
+              <el-select v-model="userStore.newUser.role" placeholder="请选择角色">
                 <el-option label="管理员" value="ADMIN"></el-option>
                 <el-option label="普通用户" value="OPERATOR"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="电话号码">
-              <el-input v-model="newUser.phone"></el-input>
+              <el-input v-model="userStore.newUser.phone"></el-input>
             </el-form-item>
             <el-form-item label="密码">
-              <el-input type="password" v-model="newUser.password"></el-input>
+              <el-input type="password" v-model="userStore.newUser.password"></el-input>
             </el-form-item>
           </el-form>
           <template #footer>
-            <el-button @click="showAddUserDialog = false">取消</el-button>
-            <el-button type="primary" @click="userStore.addUser(newUser),showAddUserDialog = false">保存</el-button>
+            <el-button @click="showAddUserDialog = false,userStore.resetNewUser()">取消</el-button>
+            <el-button type="primary" @click="userStore.addUser(userStore.newUser),showAddUserDialog = false">保存</el-button>
           </template>
         </el-dialog>
 
@@ -74,7 +74,7 @@
           </el-form>
           <template #footer>
             <el-button @click="userStore.cancelUserUpdate()">取消</el-button>
-            <el-button type="primary" @click="userStore.updateUser(),showUpdateUserDialog = false">保存</el-button>
+            <el-button type="primary" @click="userStore.updateUser(userStore.currentUser),showUpdateUserDialog = false">保存</el-button>
           </template>
         </el-dialog>
 
@@ -84,9 +84,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import { useUserStore } from '../../store/userStore';
-import { newUser } from '../../apis/user';
+
 
 const showAddUserDialog = ref(false)
 const showUpdateUserDialog = ref(false)
@@ -94,8 +94,14 @@ const showUpdateUserDialog = ref(false)
 const userStore = useUserStore()
 const activeComponent = ref('userList')
 
+const handleEdit = async (id) => {
+  await userStore.loadUserById(id) // 等待接口返回
+  showUpdateUserDialog.value = true
+  
+}
+
 // 页面加载时获取用户列表
-onMounted(() => {
+onBeforeMount(() => {
   userStore.loadUserList()
 })
 

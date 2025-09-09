@@ -14,12 +14,13 @@ const routes = [
     meta: { requiresAuth: true }, // 标记需要登录
     children: [
       {
-        path: '',
-        redirect: '/home'
+        path: '/HomePage',
+        name: 'HomePage',
+        component: () => import('../views/HomePage.vue') // 首页
       },
       {
-        path: '/home',
-        name: 'Home',
+        path: '/user',
+        name: 'User',
         component: () => import('../views/user/UserList.vue')
       }
     ]

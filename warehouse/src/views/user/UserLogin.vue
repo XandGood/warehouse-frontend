@@ -43,7 +43,7 @@ const handleLogin = async () => {
     if (token && token !== '用户名不存在' && token !== '密码错误') {
       localStorage.setItem('token', token)
       localStorage.setItem('username', loginForm.username) // 存储用户名
-      router.push('/')
+      router.push('/HomePage')
     } else {
       alert(token) // 提示错误信息
     }
