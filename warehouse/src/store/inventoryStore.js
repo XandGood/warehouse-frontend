@@ -9,12 +9,14 @@ export const useInventoryStore = defineStore('inventory', () => {
 
   const getProductInventory = async (id) => {
     const res = await getInventoryByProductId(id)
-    productInventory.value = res.data
+    productInventory.value = res
+    return res
   } 
 
   const getWarehouseInventory = async (id) => {
     const res = await getInventoryByWarehouseId(id)
-    warehouseInventory.value = res.data
+    warehouseInventory.value = res
+    return res
   }
  
   const getInventory = async () => {
@@ -25,8 +27,7 @@ export const useInventoryStore = defineStore('inventory', () => {
     const totalStock = computed(() => {
     return inventoryList.value.reduce((total, item) => total + item.quantity, 0)
   })
-
-  //计算本月库存
+  
   
 
   

@@ -10,6 +10,7 @@ const routes = [
   },
   {
     path: '/',
+    redirect: '/login',
     component: () => import('../layout/mainLayout.vue'), // 首页（需登录访问）
     meta: { requiresAuth: true }, // 标记需要登录
     children: [

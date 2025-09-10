@@ -9,12 +9,14 @@ export const useProductStore = defineStore('product', () => {
 
     const ProductList = async () => {
         const res = await fetchProductList()
-        productList.value = res.data
+        productList.value = res
+        return res
     }
 
     const ProductDetail = async (id) => {
         const res = await fetchProductDetail(id)
-        currentProduct.value = res.data
+        currentProduct.value = res
+        return res
     }
 
     const ProductUpdate = async (id, data) => {
