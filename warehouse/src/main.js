@@ -5,6 +5,7 @@ import 'element-plus/dist/index.css'
 import router from './router'
 import { createPinia } from 'pinia'
 import './assets/css/global.css'
+import './assets/css/header.css'
 
 const app = createApp(App)
 const pinia = createPinia()

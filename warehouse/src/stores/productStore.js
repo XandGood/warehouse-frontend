@@ -6,6 +6,7 @@ import { fetchProductList ,fetchProductDetail, fetchProductUpdate, fetchProductD
 export const useProductStore = defineStore('product', () => {
     const productList = ref([])
     const currentProduct = ref({})
+    const newProduct = ref({})
 
     const ProductList = async () => {
         const res = await fetchProductList()
@@ -15,13 +16,13 @@ export const useProductStore = defineStore('product', () => {
 
     const ProductDetail = async (id) => {
         const res = await fetchProductDetail(id)
-        currentProduct.value = res
         return res
     }
 
-    const ProductUpdate = async (id, data) => {
-        await fetchProductUpdate(id, data)
+    const ProductUpdate = async (data) => {
+        await fetchProductUpdate(data)
         fetchProductList()
+        
     }
 
     const ProductDelete = async (id) => {
@@ -32,10 +33,13 @@ export const useProductStore = defineStore('product', () => {
     const ProductCreate = async (data) => {
         await fetchProductCreate(data)
         fetchProductCreate()
+        newProduct.value = {}
     }
+
     return {
         productList,
         currentProduct,
+        newProduct,
         ProductList,
         ProductDetail,
         ProductUpdate,

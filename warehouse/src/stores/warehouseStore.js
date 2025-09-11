@@ -4,14 +4,18 @@ import { getWarehouseList,addWarehouse,deleteWarehouse} from '../apis/warehouseA
 
 export const useWarehouseStore = defineStore('warehouse', () => {
     const warehouseList = ref([])
+    const newWarehouse = ref({ name: '', location: '', manager: ''})
 
     const getWarehouse = async () => {
-        warehouseList.value = await getWarehouseList()
+        const data = await getWarehouseList()
+        warehouseList.value = data
+        console.log(data)
     }
 
     const addWarehouseItem = async (warehouse) => {
         await addWarehouse(warehouse)
         getWarehouse()
+        newWarehouse.value = { name: '', location: '', manager: ''}
     }
 
     const deleteWarehouseItem = async (id) => {
@@ -21,6 +25,7 @@ export const useWarehouseStore = defineStore('warehouse', () => {
 
     return {
         warehouseList,
+        newWarehouse,
         getWarehouse,
         addWarehouseItem,
         deleteWarehouseItem

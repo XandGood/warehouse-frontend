@@ -1,0 +1,31 @@
+ .views-header {
+            background: #bed3ed;
+            border-radius: 10px;
+            padding: 10px 24px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #c6d5e5;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+        }
+        
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .header-title h3 {
+            font-weight: 800;
+            font-size: 20px;
+            color: #304156;
+            letter-spacing: -0.01em;
+            position: relative;
+        }

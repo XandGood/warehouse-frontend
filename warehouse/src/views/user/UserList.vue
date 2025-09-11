@@ -1,5 +1,12 @@
 <template>
   <el-container style="height: 100vh;">
+    <el-header class="views-header">
+            <div class="header-container">
+                <div class="header-title">
+                    <h3>用户列表</h3>
+                </div>
+            </div>
+        </el-header>
     <el-container>
       <el-main>
         <!-- 用户列表（默认显示） -->
@@ -85,7 +92,7 @@
 
 <script setup>
 import { ref, onBeforeMount } from 'vue'
-import { useUserStore } from '../../store/userStore';
+import { useUserStore } from '../../stores/userStore';
 
 
 const showAddUserDialog = ref(false)

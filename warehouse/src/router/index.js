@@ -23,6 +23,31 @@ const routes = [
         path: '/user',
         name: 'User',
         component: () => import('../views/user/UserList.vue')
+      },
+      {
+        path: '/product',
+        name: 'Product',
+        component: () => import('../views/product/ProductList.vue')
+      },
+      {
+        path: '/inventory',
+        name: 'Inventory',
+        component: () => import('../views/inventory/InventoryList.vue')
+      },
+      {
+        path: '/warehouse',
+        name: 'Warehouse',
+        component: () => import('../views/warehouse/WarehouseList.vue')
+      },
+      {
+        path: '/inventory_record',
+        name: 'InventoryRecord',
+        component: () => import('../views/inventory_record/InventoryRecordList.vue')
+      },
+      {
+        path: '/new_inventory',
+        name: 'NewInventory',
+        component: () => import('../views/NewInventory.vue')
       }
     ]
   }

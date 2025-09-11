@@ -10,7 +10,8 @@
         router
         background-color="#304156"
         text-color="white"
-        active-text-color="#eeeeee"
+        active-text-color="#409EFF"
+        :unique-opened="true"
         style="border-right: none; overflow: hidden;"
       >
         <el-sub-menu index="1">
@@ -20,30 +21,24 @@
         <el-sub-menu index="2">
           <template #title>库存管理</template>
           <el-menu-item index="/inventory">库存列表</el-menu-item>
-          <el-menu-item index="/inventory/add">新增库存</el-menu-item>
+          <el-menu-item index="/product">产品列表</el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="3">
-          <template #title>订单管理</template>
-          <el-menu-item index="/order">订单列表</el-menu-item>
-          <el-menu-item index="/order/add">新增订单</el-menu-item>
+          <template #title>库存记录</template>
+          <el-menu-item index="/inventory_record">库存记录列表</el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="4">
-          <template #title>入库管理</template>
-          <el-menu-item index="/inbound">入库列表</el-menu-item>
-          <el-menu-item index="/inbound/add">新增入库</el-menu-item>
-        </el-sub-menu>
-        <el-sub-menu index="5">
-          <template #title>出库管理</template>
-          <el-menu-item index="/outbound">出库列表</el-menu-item>
-          <el-menu-item index="/outbound/add">新增出库</el-menu-item>
-        </el-sub-menu>
-        <el-sub-menu index="6">
           <template #title>仓库管理</template>
           <el-menu-item index="/warehouse">仓库列表</el-menu-item>
-          <el-menu-item index="/warehouse/add">新增仓库</el-menu-item>
         </el-sub-menu>
         <!-- 可以继续添加其他菜单项 -->
       </el-menu>
+       <div class="bottom-entry">
+      <el-button round  type="primary" size="large" @click="router.push('/new_inventory')"
+      style="width: 90%; height: 6vh; margin: 20px auto; display: block; font-size: 16px; border-color: #4a5f7a;">
+        出入库录入<el-icon class="el-icon--right"><ArrowRight /></el-icon>
+      </el-button>
+    </div>
     </el-aside>
     <el-container>
       <el-header>
@@ -70,6 +65,7 @@
 <script setup>
 import { computed, onMounted, ref} from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import {ArrowRight} from '@element-plus/icons-vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -150,6 +146,19 @@ const handleLogout = () => {
   overflow-y: auto; /* 只在垂直方向出现滚动条 */
   overflow-x: hidden; /* 防止水平方向出现滚动条 */
   border-right: none;
+}
+.el-menu-item.is-active {
+  background-color: #263445 ;
+  border-right: 3px solid #409EFF;
+}
+/* 子菜单标题样式 */
+.el-sub-menu__title:hover {
+  background-color: #263445 ;
+}
+
+/* 菜单项悬浮样式 */
+.el-menu-item:hover {
+  background-color: #263445;
 }
 
 </style>

@@ -98,10 +98,10 @@ import {
   Box, ArrowUp, ArrowDown, Warning, 
 //   RefreshCw, Download, Filter 
 } from '@element-plus/icons-vue'
-import { useProductStore } from '../store/productStore'
-import { useInventoryStore } from '../store/inventoryStore'
-import { useInventoryRecordStore } from '../store/inventory_recordStore'
-import { useWarehouseStore } from '../store/warehouseStore'
+import { useProductStore } from '../stores/productStore'
+import { useInventoryStore } from '../stores/inventoryStore'
+import { useInventoryRecordStore } from '../stores/inventory_recordStore'
+import { useWarehouseStore } from '../stores/warehouseStore'
 
 
 const productStore = useProductStore()
